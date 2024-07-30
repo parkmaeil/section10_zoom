@@ -18,7 +18,7 @@
 </head>
 <body>
 
-    <div class="container">
+    <div class="container mt-3">
         <h2>Spring기반 RESTful API SOA 서비스 개발</h2>
         <div class="card">
             <div class="card-header">
