@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController // JSON
 @RequestMapping("/api")
@@ -35,11 +36,15 @@ public class TemplateController {
             }
         ]
      */
-     @GetMapping("/products")
+     @GetMapping("/products/all")
      public ResponseEntity<?> list(){
          List<Product> list=service.products();
          return new ResponseEntity<>(list, HttpStatus.OK);
      }
+    // 페이징 요청 Rest API - 목요일
+    @GetMapping("/products") // { "page":2 , "size" : 10}
+    
+
 
      // POST : http://localhost:8081/restful/api/products [제품등록하기] ---------> 성공(1, 0)여부 정보 ?
     @PostMapping("/products") // JSON : {         }
@@ -64,7 +69,19 @@ public class TemplateController {
     // PUT  :  http://localhost:8081/restful/api/products/{id} :  { product_number, product_name, inventory, price }
     @PutMapping("/products/{product_number}")
     public ResponseEntity<?> update(@PathVariable int product_number, @RequestBody Product product ){
-         service.update(product);
+         service.update(product_number, product);
          return new ResponseEntity<>("success", HttpStatus.OK);
+    }
+    @GetMapping("/products/search") // {"keyword" : "세탁기" }
+    public ResponseEntity<?> search(@RequestBody Map<String, String> data){
+         List<Product> pList=service.search(data.get("keyword"));
+         return new ResponseEntity<>(pList, HttpStatus.OK);
+    }
+
+    @PutMapping("/products/{product_number}/inventory")
+    public ResponseEntity<?> updateInventory(@PathVariable int  product_number,
+                                             @RequestBody Map<String, Integer> inventoryInfo){
+        service.updateInventory(product_number, inventoryInfo.get("inventory"));
+        return new ResponseEntity<>("Inventory updated successfully", HttpStatus.OK);
     }
 }

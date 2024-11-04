@@ -22,9 +22,21 @@
 
     <update id="update" parameterType="com.example.entity.Product">
         update product  set
-        product_name=#{product_name},
-        inventory=#{inventory},
-        price=#{price}
+        product_name=#{product.product_name},
+        inventory=#{product.inventory},
+        price=#{product.price}
         where product_number=#{product_number}
     </update>
+
+    <select id="search" resultType="com.example.entity.Product">
+        select * from product
+        where product_name like concat('%', #{keyword}, '%')
+    </select>
+
+    <update id="updateInventory" >
+        update product
+        set  inventory=#{inventory}
+        where product_number=#{product_number}
+    </update>
+
 </mapper>

@@ -30,8 +30,18 @@ public class TemplateService {
          return mapper.getById(product_number);
    }
 
-   public void update(Product product){
+   public void update(int product_number,  Product product){
        // 코딩~~~
-        mapper.update(product);
+        mapper.update(product_number, product);
    }
+
+    public List<Product> search(String keyword) {
+         return mapper.search(keyword);
+    }
+
+    public void updateInventory(int productNumber, int inventory) {
+        mapper.updateInventory(productNumber, inventory);
+    }
+
+
 }

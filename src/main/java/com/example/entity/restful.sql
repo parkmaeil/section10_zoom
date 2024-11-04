@@ -80,3 +80,12 @@ COLLATE = utf8mb4_0900_ai_ci;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+INSERT INTO customer (customer_id, password, customer_name, age, rating, occupation, reserves)
+VALUES
+('user01', 'password01', '김철수', 28, 'Gold', '개발자', 5000),
+('user02', 'password02', '박영희', 32, 'Silver', '디자이너', 3000),
+('user03', 'password03', '이민호', 24, 'VIP', '마케터', 10000),
+('user04', 'password04', '최유리', 29, 'Gold', '작가', 7000),
+('user05', 'password05', '정태웅', 35, 'Silver', '교사', 2000)
