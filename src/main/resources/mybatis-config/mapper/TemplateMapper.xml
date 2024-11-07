@@ -39,4 +39,14 @@
         where product_number=#{product_number}
     </update>
 
+    <select id="pageList" parameterType="com.example.entity.Criteria"
+            resultType="com.example.entity.Product">
+            select * from product
+            limit #{pageStart}, #{size}
+    </select>
+
+    <select id="totalCount" resultType="int">
+          select count(*) from product
+    </select>
+
 </mapper>

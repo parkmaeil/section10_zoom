@@ -1,5 +1,6 @@
 package com.example.service;
 
+import com.example.entity.Criteria;
 import com.example.entity.Product;
 import com.example.repository.TemplateMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +44,11 @@ public class TemplateService {
         mapper.updateInventory(productNumber, inventory);
     }
 
+    public List<Product> pageList(Criteria cri){
+         return mapper.pageList(cri);
+    }
 
+    public int totalCount() {
+         return mapper.totalCount();
+    }
 }

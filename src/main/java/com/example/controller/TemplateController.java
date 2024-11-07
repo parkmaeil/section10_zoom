@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import com.example.entity.Criteria;
+import com.example.entity.PageMaker;
 import com.example.entity.Product;
 import com.example.service.TemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,10 +44,15 @@ public class TemplateController {
          return new ResponseEntity<>(list, HttpStatus.OK);
      }
     // 페이징 요청 Rest API - 목요일
-    @GetMapping("/products") // { "page":2 , "size" : 10}
-    
-
-
+    @PostMapping("/products/paging") // { "page":3 , "size" : 10}
+    public ResponseEntity<?> pageList(@RequestBody Criteria cri){
+              List<Product> list=service.pageList(cri);
+              PageMaker pm=new PageMaker();
+              pm.setCri(cri);
+              pm.setTotalCount(service.totalCount());
+              pm.setLists(list);
+              return new ResponseEntity<>(pm, HttpStatus.OK);
+    }
      // POST : http://localhost:8081/restful/api/products [제품등록하기] ---------> 성공(1, 0)여부 정보 ?
     @PostMapping("/products") // JSON : {         }
     public ResponseEntity<?> register(@RequestBody Product product){

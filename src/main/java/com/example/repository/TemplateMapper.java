@@ -1,5 +1,6 @@
 package com.example.repository;
 
+import com.example.entity.Criteria;
 import com.example.entity.Product;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +21,8 @@ public interface TemplateMapper {
     public List<Product> search(String keyword);
     public void updateInventory(@Param("product_number") int product_number,
                                                        @Param("inventory") int inventory);
+
+    public List<Product> pageList(Criteria cri);
+    public int totalCount();
 }
 
